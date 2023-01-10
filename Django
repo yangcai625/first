@@ -177,9 +177,41 @@ def index(request):
 
 
 
+#使用 sql server 
+1.python下载
+
+https://www.python.org/downloads/windows/
+
+2.根据当前windows和python的版本，下载pymssql相应的exe安装文件。
+
+https://pypi.org/project/pymssql/2.1.1/
+
+3. 安装用到的扩展
+
+Django只内置了几个 Database Backend（mysql、oracle、sqllite3（默认）、postgresql_psycopg2），所以原生并不支持Microsoft SQL Server。
+好在有前人的尝试，以及官方文档的介绍，终于使用django-pyodbc搞定了。
+        使用pip安装用到的扩展包：
+
+pip install django-sqlserver django-pytds pyodbc django-pyodbc pypiwin32 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 
 
+3.配置settings.py文件
+// An highlighted block
+DATABASES = {
+'default': {
+'ENGINE': 'sql_server.pyodbc',
+'NAME': 'demo', #需要连接的数据库名字
+'USER': '***', #连接数据库的用户名
+'PASSWORD': '***', #对应的用户密码
+'HOST': 'localhost', # IP 地址
+'PORT': '1433', #端口号
+'OPTIONS': {
+'driver': 'SQL Server Native Client 11.0', # 驱动
+'MARS_Connection': True,
+},
 
+}
+}
 
 
 
